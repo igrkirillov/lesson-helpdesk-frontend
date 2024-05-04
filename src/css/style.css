@@ -90,7 +90,60 @@ body {
 }
 
 .ticket-dialog {
+    width: 400px;
+    height: 250px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: calc(30% - 250px/2);
+    left: calc(50% - 400px/2);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 2;
+    background-color: white;
+}
+
+.ticket-dialog-base {
+    content: "";
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: gray;
+    opacity: 80%;
+}
+
+.ticket-dialog-title {
+    margin: auto;
+    text-align: center;
+}
+
+.ticket-dialog-container {
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.ticket-dialog-name {
+    display: block;
+    width: 100%;
+}
+
+.ticket-dialog-description {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+}
+
+.ticket-dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.ticket-dialog-cancel {
+    margin-right: 4px;
+}
+
+.ticket-dialog-ok {
+    margin-left: 4px;
 }
