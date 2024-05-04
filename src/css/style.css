@@ -15,6 +15,15 @@ body {
     margin: auto;
 }
 
+.tickets-toolbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tickets-add {
+    display: block;
+}
+
 .ticket {
     border: 1px solid gray;
     border-radius: 4px;
@@ -80,3 +89,8 @@ body {
     text-decoration: none;
 }
 
+.ticket-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

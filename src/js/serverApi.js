@@ -12,6 +12,10 @@ export async function allTicketsFromServer() {
   }).then(response => response.json());
 }
 
+export async function saveTicketOnServer() {
+
+}
+
 function makeUrl(queryParams) {
   const queryParamsMap = new Map(Object.entries(queryParams || {}));
   let url = baseUrl;
