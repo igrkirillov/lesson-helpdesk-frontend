@@ -1,6 +1,6 @@
-import TrelloWidget from "./TrelloWidget";
+import TicketsWidget from "./TicketsWidget";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mainElement = document.querySelector("main");
-  new TrelloWidget(mainElement);
+  new TicketsWidget(mainElement)
 });

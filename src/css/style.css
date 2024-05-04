@@ -10,68 +10,73 @@ body {
     text-align: center;
 }
 
-.columns-container {
-    display: flex;
-    flex-wrap: nowrap;
+.tickets {
+    max-width: 600px;
+    margin: auto;
 }
 
-.column {
-    width: 33.33%;
-    min-height: 400px;
-    padding: 2px;
-}
-
-.column:nth-child(1) {
-    background-color: lightgreen;
-}
-
-.column:nth-child(2) {
-    background-color: lightyellow;
-}
-
-.column:nth-child(3) {
-    background-color: lightcoral;
-}
-
-.card {
+.ticket {
     border: 1px solid gray;
     border-radius: 4px;
     padding: 2px;
 }
 
-.card-remove {
+.ticket-row {
+    display: flex;
+    align-items: center;
+}
+
+.ticket-status {
     display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.visually-hidden {
+    position: fixed;
+    transform: scale(0);
+}
+
+.ticket-status-switch {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.ticket-status:checked + .ticket-status-switch:after {
     position: absolute;
+    content: "V";
+    top: 5px;
+    left: 7px;
+}
+
+.ticket-name {
+    display: block;
+    flex-grow: 1;
+    margin: auto 2px;
+}
+
+.ticket-datetime {
+    display: block;
+    margin: auto 2px;
+}
+
+.ticket-toolbar {
+    display: flex;
+    margin: auto 2px;
+}
+
+.ticket-toolbar-element {
+    display: block;
+    border: 1px solid gray;
+    border-radius: 50%;
+    margin: auto 2px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
     text-decoration: none;
-    right: 4px;
-    top: 2px;
 }
 
-.sketch {
-    border: 2px dashed black;
-}
-
-.card:nth-child(n + 2) {
-    margin-top: 4px;
-}
-
-.card-toolbar {
-    margin-top: 4px;
-}
-
-.column-toolbar {
-
-}
-
-.adding-card-area {
-    width: 100%;
-    min-height: 100px;
-}
-
-.display-none {
-    display: none;
-}
-
-.dragging {
-    position: absolute;
-}
