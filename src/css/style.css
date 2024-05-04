@@ -20,6 +20,10 @@ body {
     justify-content: flex-end;
 }
 
+.tickets-container {
+    margin-top: 4px;
+}
+
 .tickets-add {
     display: block;
 }
@@ -28,6 +32,10 @@ body {
     border: 1px solid gray;
     border-radius: 4px;
     padding: 2px;
+}
+
+.ticket:nth-child(n + 2) {
+    margin-top: 4px;
 }
 
 .ticket-row {

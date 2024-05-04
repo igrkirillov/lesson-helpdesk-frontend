@@ -1,6 +1,7 @@
 import {allTicketsFromServer} from "./serverApi";
 import TicketWidget from "./TicketWidget";
 import TicketDialogWidget from "./TicketDialogWidget";
+import Ticket from "./Ticket";
 
 export default class TicketsWidget {
   constructor(ownerElement) {
@@ -8,6 +9,7 @@ export default class TicketsWidget {
     this.ticketWidgets = [];
     this.addListeners();
     this.loadTickets();
+    this.ticketsContainerElement = this.element.querySelector(".tickets-container");
   }
 
   createElement(ownerElement) {
@@ -30,17 +32,32 @@ export default class TicketsWidget {
   }
 
   onClickAddTicket() {
-    const dialog = new TicketDialogWidget(this.element);
+    new TicketDialogWidget(this.element, new Ticket());
   }
 
   loadTickets() {
     const ticketsWidget = this;
     allTicketsFromServer().then(ticketDtoArray => {
-      const ticketsContainerElement = ticketsWidget.element.querySelector(".tickets-container");
-      ticketDtoArray.forEach(dto => {
-        const ticketWidget = new TicketWidget(ticketsContainerElement, dto);
-        ticketsWidget.ticketWidgets.push(ticketWidget);
-      });
+      ticketDtoArray.forEach(dto => ticketsWidget.addTicketWidget(dto));
     });
+  }
+
+  addTicketWidget(dto) {
+    const ticketWidget = new TicketWidget(this, this.ticketsContainerElement, dto);
+    this.ticketWidgets.push(ticketWidget);
+  }
+
+  reloadTicketWidget(dto) {
+    const ticketWidget = this.ticketWidgets.find(w => w.dto.id === dto.id);
+    if (ticketWidget) {
+      ticketWidget.reload();
+    }
+  }
+
+  removeTicketWidget(dto) {
+    const ticketWidget = this.ticketWidgets.find(w => w.dto.id === dto.id);
+    if (ticketWidget) {
+      ticketWidget.remove();
+    }
   }
 }

@@ -1,3 +1,4 @@
+import Ticket from "./Ticket";
 
 const baseUrl = "http://localhost:7070";
 export async function allTicketsFromServer() {
@@ -9,11 +10,74 @@ export async function allTicketsFromServer() {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-  }).then(response => response.json());
+  }).then(response => response.json())
+    .then(json => parseDtoArrayJson(json));
 }
 
-export async function saveTicketOnServer() {
+export async function saveTicketOnServer(dto) {
+  const url = makeUrl({
+    method: "createTicket"
+  });
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: encodeToUrlEncodedFormat(dto),
+  }).then(response => response.json())
+    .then(json => parseDtoJson(json));
+}
 
+export async function deleteByIdOnServer(dto) {
+  const url = makeUrl({
+    method: "deleteById",
+    id: dto.id,
+  });
+  return fetch(url, {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  }).then(response => console.log(response));
+}
+
+export async function updateByIdOnServer(dto) {
+  const url = makeUrl({
+    method: "updateById",
+    id: dto.id,
+  });
+  return fetch(url, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: encodeToUrlEncodedFormat(dto)
+  }).then(response => response.json())
+    .then(json => parseDtoJson(json));
+}
+
+export async function ticketByIdFromServer(dto) {
+  const url = makeUrl({
+    method: "ticketById",
+    id: dto.id,
+  });
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  }).then(response => response.json())
+    .then(json => parseDtoJson(json));
+}
+
+function encodeToUrlEncodedFormat(dto) {
+  let body = [];
+  for (const key of Object.keys(dto)) {
+    const encodedKey = encodeURIComponent(key);
+    const encodedValue = encodeURIComponent(dto[key]);
+    body.push(encodedKey + "=" + encodedValue);
+  }
+  return body.join("&");
 }
 
 function makeUrl(queryParams) {
@@ -31,4 +95,25 @@ function makeUrl(queryParams) {
     ++index;
   }
   return url;
+}
+
+function parseDtoJson(json) {
+  return new Ticket(
+    json.id,
+    json.name,
+    Boolean(json.status),
+    json.description,
+    new Date(json.created)
+  );
+}
+
+function parseDtoArrayJson(jsonArray) {
+  const array = [];
+  console.dir(jsonArray)
+  if (jsonArray) {
+    for (const dtoJson of jsonArray) {
+      array.push(parseDtoJson(dtoJson));
+    }
+  }
+  return array;
 }
