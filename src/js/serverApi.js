@@ -98,14 +98,13 @@ function makeUrl(queryParams) {
 }
 
 function parseDtoJson(json) {
-  const t = new Ticket(
+  return new Ticket(
     json.id,
     json.name,
     json.status === "true",
     json.description,
     new Date(json.created)
   );
-  return t;
 }
 
 function parseDtoArrayJson(jsonArray) {
