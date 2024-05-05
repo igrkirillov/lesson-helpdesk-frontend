@@ -32,7 +32,9 @@ export default class YesNoDialogWidget {
     this.onClickCancel = this.onClickCancel.bind(this);
 
     const okButtonElement = this.element.querySelector(".yesno-dialog-ok");
-    const cancelButtonElement = this.element.querySelector(".yesno-dialog-cancel");
+    const cancelButtonElement = this.element.querySelector(
+      ".yesno-dialog-cancel"
+    );
 
     okButtonElement.addEventListener("click", this.onClickOk);
     cancelButtonElement.addEventListener("click", this.onClickCancel);
@@ -52,7 +54,9 @@ export default class YesNoDialogWidget {
 
   close() {
     const okButtonElement = this.element.querySelector(".yesno-dialog-ok");
-    const cancelButtonElement = this.element.querySelector(".yesno-dialog-cancel");
+    const cancelButtonElement = this.element.querySelector(
+      ".yesno-dialog-cancel"
+    );
 
     okButtonElement.removeEventListener("click", this.onClickOk);
     cancelButtonElement.removeEventListener("click", this.onClickCancel);

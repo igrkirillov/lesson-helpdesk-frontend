@@ -1,6 +1,10 @@
-import {deleteByIdOnServer, ticketByIdFromServer, updateByIdOnServer} from "./serverApi";
+import {
+  deleteByIdOnServer,
+  ticketByIdFromServer,
+  updateByIdOnServer,
+} from "./serverApi";
 import TicketDialogWidget from "./TicketDialogWidget";
-import {toRusFormatDate} from "./utils";
+import { toRusFormatDate } from "./utils";
 import YesNoDialogWidget from "./YesNoDialogWidget";
 
 export default class TicketWidget {
@@ -44,20 +48,31 @@ export default class TicketWidget {
 
   onClickEdit(event) {
     event.stopPropagation();
-    new TicketDialogWidget(this.ticketsWidget, this.ownerElement, this.dto.clone());
+    new TicketDialogWidget(
+      this.ticketsWidget,
+      this.ownerElement,
+      this.dto.clone()
+    );
   }
 
   onClickRemove(event) {
     event.stopPropagation();
     const widget = this;
-    new YesNoDialogWidget(this.ownerElement, {
-      title: "Удалить тикет",
-      message: "Вы уверены, что хотите удалить тикет? Это действие необратимо.",
-    }, answer => {
-      if (answer === "yes") {
-        deleteByIdOnServer(widget.dto).then(__ => widget.ticketsWidget.removeTicketWidget(widget.dto));
+    new YesNoDialogWidget(
+      this.ownerElement,
+      {
+        title: "Удалить тикет",
+        message:
+          "Вы уверены, что хотите удалить тикет? Это действие необратимо.",
+      },
+      (answer) => {
+        if (answer === "yes") {
+          deleteByIdOnServer(widget.dto).then(() =>
+            widget.ticketsWidget.removeTicketWidget(widget.dto)
+          );
+        }
       }
-    });
+    );
   }
 
   onClickStatus(event) {
@@ -65,7 +80,7 @@ export default class TicketWidget {
     const widget = this;
     const tempDto = this.dto.clone();
     tempDto.status = this.getTicketStatusElement().checked;
-    updateByIdOnServer(tempDto).then(dto => {
+    updateByIdOnServer(tempDto).then((dto) => {
       widget.dto = dto;
       widget.ticketsWidget.reloadTicketWidget(dto);
     });
@@ -81,7 +96,7 @@ export default class TicketWidget {
 
   showDescription() {
     const widget = this;
-    ticketByIdFromServer(this.dto).then(dto => {
+    ticketByIdFromServer(this.dto).then((dto) => {
       const descElement = widget.getTicketDescriptionElement();
       descElement.textContent = dto.description;
       descElement.classList.remove("display-none");
@@ -130,21 +145,30 @@ export default class TicketWidget {
 
     this.getTicketEditElement().addEventListener("click", this.onClickEdit);
     this.getTicketRemoveElement().addEventListener("click", this.onClickRemove);
-    this.getTicketStatusLabelElement().addEventListener("click", this.onClickStatus);
+    this.getTicketStatusLabelElement().addEventListener(
+      "click",
+      this.onClickStatus
+    );
     this.element.addEventListener("click", this.onClickTicket);
   }
 
   remove() {
     this.getTicketEditElement().removeEventListener("click", this.onClickEdit);
-    this.getTicketRemoveElement().removeEventListener("click", this.onClickRemove);
-    this.getTicketStatusLabelElement().removeEventListener("click", this.onClickStatus);
+    this.getTicketRemoveElement().removeEventListener(
+      "click",
+      this.onClickRemove
+    );
+    this.getTicketStatusLabelElement().removeEventListener(
+      "click",
+      this.onClickStatus
+    );
     this.element.removeEventListener("click", this.onClickTicket);
     this.ownerElement.removeChild(this.element);
   }
 
   reload() {
     const widget = this;
-    ticketByIdFromServer(this.dto).then(dto => {
+    ticketByIdFromServer(this.dto).then((dto) => {
       widget.dto = dto;
       widget.refreshFields();
     });
@@ -153,6 +177,8 @@ export default class TicketWidget {
   refreshFields() {
     this.getTicketStatusElement().value = this.dto.status;
     this.getTicketNameElement().textContent = this.dto.name;
-    this.getTicketDateTimeElement().textContent = toRusFormatDate(this.dto.created);
+    this.getTicketDateTimeElement().textContent = toRusFormatDate(
+      this.dto.created
+    );
   }
 }

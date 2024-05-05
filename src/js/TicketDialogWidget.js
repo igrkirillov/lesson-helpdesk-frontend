@@ -1,4 +1,4 @@
-import {saveTicketOnServer, updateByIdOnServer} from "./serverApi";
+import { saveTicketOnServer, updateByIdOnServer } from "./serverApi";
 
 export default class TicketDialogWidget {
   constructor(ticketsWidget, ownerElement, dto) {
@@ -20,9 +20,13 @@ export default class TicketDialogWidget {
       </div>
       <div class="ticket-dialog-container">
           <label for="name">Краткое описание</label>
-          <input class="ticket-dialog-name" type="text" name="name" value="${dto.name || ""}">
+          <input class="ticket-dialog-name" type="text" name="name" value="${
+            dto.name || ""
+          }">
           <label for="description">Подробное описание</label>
-          <textarea class="ticket-dialog-description" name="description">${dto.description || ""}</textarea>
+          <textarea class="ticket-dialog-description" name="description">${
+            dto.description || ""
+          }</textarea>
           <div class="ticket-dialog-buttons">
               <input class="ticket-dialog-cancel" type="submit" value="Отмена">
               <input class="ticket-dialog-ok" type="submit" value="Ок">
@@ -38,7 +42,9 @@ export default class TicketDialogWidget {
     this.onClickCancel = this.onClickCancel.bind(this);
 
     const okButtonElement = this.element.querySelector(".ticket-dialog-ok");
-    const cancelButtonElement = this.element.querySelector(".ticket-dialog-cancel");
+    const cancelButtonElement = this.element.querySelector(
+      ".ticket-dialog-cancel"
+    );
 
     okButtonElement.addEventListener("click", this.onClickOk);
     cancelButtonElement.addEventListener("click", this.onClickCancel);
@@ -62,12 +68,12 @@ export default class TicketDialogWidget {
     const dialogWidget = this;
     if (this.dto.id) {
       updateByIdOnServer(this.dto)
-        .then(dto => dialogWidget.ticketsWidget.reloadTicketWidget(dto))
-        .then(() => dialogWidget.close())
+        .then((dto) => dialogWidget.ticketsWidget.reloadTicketWidget(dto))
+        .then(() => dialogWidget.close());
     } else {
       saveTicketOnServer(this.dto)
-        .then(dto => dialogWidget.ticketsWidget.addTicketWidget(dto))
-        .then(() => dialogWidget.close())
+        .then((dto) => dialogWidget.ticketsWidget.addTicketWidget(dto))
+        .then(() => dialogWidget.close());
     }
   }
 
@@ -77,7 +83,9 @@ export default class TicketDialogWidget {
 
   close() {
     const okButtonElement = this.element.querySelector(".ticket-dialog-ok");
-    const cancelButtonElement = this.element.querySelector(".ticket-dialog-cancel");
+    const cancelButtonElement = this.element.querySelector(
+      ".ticket-dialog-cancel"
+    );
 
     okButtonElement.removeEventListener("click", this.onClickOk);
     cancelButtonElement.removeEventListener("click", this.onClickCancel);

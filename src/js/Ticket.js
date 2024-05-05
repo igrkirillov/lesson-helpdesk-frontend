@@ -8,6 +8,12 @@ export default class Ticket {
   }
 
   clone() {
-    return new Ticket(this.id, this.name, this.status, this.description, this.created);
+    return new Ticket(
+      this.id,
+      this.name,
+      this.status,
+      this.description,
+      this.created
+    );
   }
 }

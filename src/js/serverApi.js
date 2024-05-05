@@ -3,29 +3,31 @@ import Ticket from "./Ticket";
 const baseUrl = "http://localhost:7070";
 export async function allTicketsFromServer() {
   const url = makeUrl({
-    method: "allTickets"
+    method: "allTickets",
   });
   return fetch(url, {
     method: "GET",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-  }).then(response => response.json())
-    .then(json => parseDtoArrayJson(json));
+  })
+    .then((response) => response.json())
+    .then((json) => parseDtoArrayJson(json));
 }
 
 export async function saveTicketOnServer(dto) {
   const url = makeUrl({
-    method: "createTicket"
+    method: "createTicket",
   });
   return fetch(url, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: encodeToUrlEncodedFormat(dto),
-  }).then(response => response.json())
-    .then(json => parseDtoJson(json));
+  })
+    .then((response) => response.json())
+    .then((json) => parseDtoJson(json));
 }
 
 export async function deleteByIdOnServer(dto) {
@@ -36,9 +38,9 @@ export async function deleteByIdOnServer(dto) {
   return fetch(url, {
     method: "DELETE",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-  }).then(response => console.log(response));
+  }).then((response) => console.log(response));
 }
 
 export async function updateByIdOnServer(dto) {
@@ -49,11 +51,12 @@ export async function updateByIdOnServer(dto) {
   return fetch(url, {
     method: "PATCH",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: encodeToUrlEncodedFormat(dto)
-  }).then(response => response.json())
-    .then(json => parseDtoJson(json));
+    body: encodeToUrlEncodedFormat(dto),
+  })
+    .then((response) => response.json())
+    .then((json) => parseDtoJson(json));
 }
 
 export async function ticketByIdFromServer(dto) {
@@ -64,10 +67,11 @@ export async function ticketByIdFromServer(dto) {
   return fetch(url, {
     method: "GET",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-  }).then(response => response.json())
-    .then(json => parseDtoJson(json));
+  })
+    .then((response) => response.json())
+    .then((json) => parseDtoJson(json));
 }
 
 function encodeToUrlEncodedFormat(dto) {

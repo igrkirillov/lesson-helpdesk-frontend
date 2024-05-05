@@ -1,4 +1,4 @@
-import {allTicketsFromServer} from "./serverApi";
+import { allTicketsFromServer } from "./serverApi";
 import TicketWidget from "./TicketWidget";
 import TicketDialogWidget from "./TicketDialogWidget";
 import Ticket from "./Ticket";
@@ -9,7 +9,8 @@ export default class TicketsWidget {
     this.ticketWidgets = [];
     this.addListeners();
     this.loadTickets();
-    this.ticketsContainerElement = this.element.querySelector(".tickets-container");
+    this.ticketsContainerElement =
+      this.element.querySelector(".tickets-container");
   }
 
   createElement(ownerElement) {
@@ -28,7 +29,10 @@ export default class TicketsWidget {
 
   addListeners() {
     const ticketsAddElement = this.element.querySelector(".tickets-add");
-    ticketsAddElement.addEventListener("click", this.onClickAddTicket.bind(this));
+    ticketsAddElement.addEventListener(
+      "click",
+      this.onClickAddTicket.bind(this)
+    );
   }
 
   onClickAddTicket() {
@@ -37,25 +41,29 @@ export default class TicketsWidget {
 
   loadTickets() {
     const ticketsWidget = this;
-    allTicketsFromServer().then(ticketDtoArray => {
-      ticketDtoArray.forEach(dto => ticketsWidget.addTicketWidget(dto));
+    allTicketsFromServer().then((ticketDtoArray) => {
+      ticketDtoArray.forEach((dto) => ticketsWidget.addTicketWidget(dto));
     });
   }
 
   addTicketWidget(dto) {
-    const ticketWidget = new TicketWidget(this, this.ticketsContainerElement, dto);
+    const ticketWidget = new TicketWidget(
+      this,
+      this.ticketsContainerElement,
+      dto
+    );
     this.ticketWidgets.push(ticketWidget);
   }
 
   reloadTicketWidget(dto) {
-    const ticketWidget = this.ticketWidgets.find(w => w.dto.id === dto.id);
+    const ticketWidget = this.ticketWidgets.find((w) => w.dto.id === dto.id);
     if (ticketWidget) {
       ticketWidget.reload();
     }
   }
 
   removeTicketWidget(dto) {
-    const ticketWidget = this.ticketWidgets.find(w => w.dto.id === dto.id);
+    const ticketWidget = this.ticketWidgets.find((w) => w.dto.id === dto.id);
     if (ticketWidget) {
       ticketWidget.remove();
     }
