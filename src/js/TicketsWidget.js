@@ -32,7 +32,7 @@ export default class TicketsWidget {
   }
 
   onClickAddTicket() {
-    new TicketDialogWidget(this.element, new Ticket());
+    new TicketDialogWidget(this, this.element, new Ticket());
   }
 
   loadTickets() {

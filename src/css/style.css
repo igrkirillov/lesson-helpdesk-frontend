@@ -155,3 +155,7 @@ body {
 .ticket-dialog-ok {
     margin-left: 4px;
 }
+
+.display-none {
+    display: none;
+}

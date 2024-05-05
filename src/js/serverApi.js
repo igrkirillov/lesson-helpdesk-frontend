@@ -98,18 +98,18 @@ function makeUrl(queryParams) {
 }
 
 function parseDtoJson(json) {
-  return new Ticket(
+  const t = new Ticket(
     json.id,
     json.name,
-    Boolean(json.status),
+    json.status === "true",
     json.description,
     new Date(json.created)
   );
+  return t;
 }
 
 function parseDtoArrayJson(jsonArray) {
   const array = [];
-  console.dir(jsonArray)
   if (jsonArray) {
     for (const dtoJson of jsonArray) {
       array.push(parseDtoJson(dtoJson));

@@ -6,4 +6,8 @@ export default class Ticket {
     this.description = description || ""; // полное описание
     this.created = created || Date.now(); // дата создания (timestamp)
   }
+
+  clone() {
+    return new Ticket(this.id, this.name, this.status, this.description, this.created);
+  }
 }
