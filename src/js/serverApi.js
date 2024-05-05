@@ -1,6 +1,7 @@
 import Ticket from "./Ticket";
 
 const baseUrl = "http://localhost:7070";
+
 export async function allTicketsFromServer() {
   const url = makeUrl({
     method: "allTickets",
