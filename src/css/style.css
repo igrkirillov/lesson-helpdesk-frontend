@@ -159,3 +159,62 @@ body {
 .display-none {
     display: none;
 }
+
+.yesno-dialog {
+    width: 400px;
+    height: 150px;
+    position: absolute;
+    top: calc(30% - 250px/2);
+    left: calc(50% - 400px/2);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 2;
+    background-color: white;
+}
+
+.yesno-dialog-base {
+    content: "";
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: gray;
+    opacity: 90%;
+}
+
+.yesno-dialog-title {
+    margin: auto;
+    text-align: center;
+}
+
+.yesno-dialog-container {
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.yesno-dialog-name {
+    display: block;
+    width: 100%;
+}
+
+.yesno-dialog-description {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+}
+
+.yesno-dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.yesno-dialog-cancel {
+    margin-right: 4px;
+}
+
+.yesno-dialog-ok {
+    margin-left: 4px;
+}

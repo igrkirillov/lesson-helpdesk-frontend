@@ -1,6 +1,7 @@
 import {deleteByIdOnServer, ticketByIdFromServer, updateByIdOnServer} from "./serverApi";
 import TicketDialogWidget from "./TicketDialogWidget";
 import {toRusFormatDate} from "./utils";
+import YesNoDialogWidget from "./YesNoDialogWidget";
 
 export default class TicketWidget {
   constructor(ticketsWidget, ownerElement, dto) {
@@ -49,7 +50,14 @@ export default class TicketWidget {
   onClickRemove(event) {
     event.stopPropagation();
     const widget = this;
-    deleteByIdOnServer(this.dto).then(__ => widget.ticketsWidget.removeTicketWidget(widget.dto));
+    new YesNoDialogWidget(this.ownerElement, {
+      title: "Удалить тикет",
+      message: "Вы уверены, что хотите удалить тикет? Это действие необратимо.",
+    }, answer => {
+      if (answer === "yes") {
+        deleteByIdOnServer(widget.dto).then(__ => widget.ticketsWidget.removeTicketWidget(widget.dto));
+      }
+    });
   }
 
   onClickStatus(event) {
