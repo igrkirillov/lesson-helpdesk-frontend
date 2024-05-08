@@ -1,6 +1,6 @@
 import Ticket from "./Ticket";
 
-const baseUrl = "http://localhost:7070";
+const baseUrl = "https://lesson-helpdesk-backend.onrender.com";
 
 export async function allTicketsFromServer() {
   const url = makeUrl({
