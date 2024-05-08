@@ -180,5 +180,6 @@ export default class TicketWidget {
     this.getTicketDateTimeElement().textContent = toRusFormatDate(
       this.dto.created
     );
+    this.getTicketDescriptionElement().textContent = this.dto.description;
   }
 }
