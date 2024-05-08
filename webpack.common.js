@@ -48,15 +48,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
-    },
-    new webpack.NormalModuleReplacementPlugin(
-      /(.*)TARGET_ENV(\.*)/,
-      (resource) => {
-        resource.request = resource.request.replace(
-          /TARGET_ENV/,
-          `${targetEnv}`
-        );
-      }
-    )),
+    }),
   ],
 };
